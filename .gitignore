@@ -1,3 +1,6 @@
+# personal
+/private/
+# bundler gem mygit
 /.bundle/
 /.yardoc
 /_yardoc/
