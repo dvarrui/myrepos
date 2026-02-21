@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "mygit/cli"
+
+Mygit::CLI.start(ARGV)
