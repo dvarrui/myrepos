@@ -12,3 +12,8 @@ end
 require "standard/rake"
 
 task default: %i[test standard]
+
+desc "Help"
+task :help do
+  system("rake -T")
+end

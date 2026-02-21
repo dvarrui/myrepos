@@ -9,7 +9,7 @@ class MygitTest < Test::Unit::TestCase
     end
   end
 
-  test "something useful" do
-    assert_equal("expected", "actual")
-  end
+  # test "URL" do
+  #   assert_equal("https://github.com/dvarrui/mygit", ::Mygit::URL)
+  # end
 end
