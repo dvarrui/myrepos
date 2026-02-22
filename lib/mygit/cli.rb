@@ -6,74 +6,50 @@ module Mygit
   class CLI < Thor
     map ["-h", "--help"] => "help"
 
-    map ["-i", "--init"] => "init"
-    option :mode, type: :numeric
-    desc "init --mode=NUMBER", "Initialize default repo files"
+    map ["-r", "--repos"] => "repos"
+    desc "repos", "Manage repos data"
     long_desc <<-LONGDESC
-    Create files for a new project.
+    Manage repos data
+    LONGDESC
+    def repos
+      puts "repos: #{options}"
+    end
 
-    mode 1 => All folders
+    map ["-t", "--template"] => "template"
+    option :use
+    option :list, type: :boolean
+    desc "template [--use=NAME|--list", "create files in the repository using the template"
+    long_desc <<-LONGDESC
+    * --use=NAME, create files in the repository using the template.
 
-    mode 2 => Only README.md
+    * --list, Show available templates
+    LONGDESC
+    def template
+      puts "template: #{options}"
+      #Mygit.init(File.absolute_path(dirpath), mode)
+    end
+
+    map ["-i", "--init"] => "init"
+    desc "init", "Create configuration files"
+    long_desc <<-LONGDESC
+    Create configuration files into 'mygit.d' folder:
+
+    (1) config.yaml: main config file.
+    
+    (2) repos.yaml: contains repos data.
+ 
     LONGDESC
     def init(dirpath = Dir.pwd)
       mode = options["mode"].to_i
       Mygit.init(File.absolute_path(dirpath), mode)
     end
 
-    map ["-l", "--log"] => "log"
-    desc "log", "Show log info from all repos"
+    map ["-s", "--server"] => "server"
+    desc "server", "Manage server"
     long_desc <<-LONGDESC
-    Show log info from all repos
+    Manage server
     LONGDESC
-    def log
-      Mygit.log
-    end
-
-    map ["--params"] => "params"
-    desc "params", "Show params required by repo"
-    long_desc <<-LONGDESC
-    Show params required by repo
-    LONGDESC
-    def params
-      Mygit.params
-    end
-
-    map ["-p", "--pull"] => "pull"
-    desc "pull", "Pull all repos into current folder"
-    long_desc <<-LONGDESC
-    Pull all repos into current folder
-    LONGDESC
-    def pull
-      Mygit.pull
-    end
-
-    map ["-r", "--rules"] => "rules"
-    desc "rules", "Shows repositories that break the rules"
-    long_desc <<-LONGDESC
-    Shows repositories that break the rules
-    LONGDESC
-    def rules
-      Mygit.rules
-    end
-
-    map ["-s", "--status"] => "status"
-    desc "status", "Show local status"
-    long_desc <<-LONGDESC
-    Create files for a new project.
-      Show local status
-    LONGDESC
-    def status(dirpath = Dir.pwd)
-      Mygit.show_status(File.absolute_path(dirpath))
-    end
-
-    map ["-t", "--test"] => "test"
-    desc "test", "Test server connection"
-    long_desc <<-LONGDESC
-    Create files for a new project.
-      Test server connection
-    LONGDESC
-    def test
+    def server
       Mygit.test
     end
 
