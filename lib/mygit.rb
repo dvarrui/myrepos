@@ -5,7 +5,7 @@ require_relative "mygit/init"
 # require_relative "mygit/params"
 # require_relative "mygit/pull"
 # require_relative "mygit/rules"
-# require_relative "mygit/status"
+require_relative "mygit/status"
 require_relative "mygit/utils/git_server"
 require_relative "mygit/version"
 
