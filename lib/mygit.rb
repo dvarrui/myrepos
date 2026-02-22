@@ -6,7 +6,7 @@ require_relative "mygit/init"
 # require_relative "mygit/pull"
 # require_relative "mygit/rules"
 # require_relative "mygit/status"
-require_relative "mygit/test"
+require_relative "mygit/utils/git_server"
 require_relative "mygit/version"
 
 module Mygit
@@ -42,6 +42,7 @@ module Mygit
   end
 
   def self.test
-    Test.call
+    g = GitServer.gitlab
+    puts "Conexión OK (#{g.user.to_h["name"]})"
   end
 end
