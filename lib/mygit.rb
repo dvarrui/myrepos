@@ -6,7 +6,7 @@ require_relative "mygit/init"
 # require_relative "mygit/pull"
 # require_relative "mygit/rules"
 # require_relative "mygit/status"
-# require_relative "mygit/test"
+require_relative "mygit/test"
 require_relative "mygit/version"
 
 module Mygit
