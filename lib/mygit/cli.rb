@@ -1,4 +1,5 @@
 require "thor"
+require_relative "init"
 require_relative "version"
 require_relative "../mygit"
 
@@ -30,9 +31,9 @@ module Mygit
     end
 
     map ["-i", "--init"] => "init"
-    desc "init", "Create configuration files"
+    desc "init [DIRPATH]", "Create configuration files"
     long_desc <<-LONGDESC
-    Create configuration files into 'mygit.d' folder:
+    Create configuration files into 'DIRPATH/mygit.d' folder:
 
     (1) config.yaml: main config file.
     
@@ -40,8 +41,8 @@ module Mygit
  
     LONGDESC
     def init(dirpath = Dir.pwd)
-      mode = options["mode"].to_i
-      Mygit.init(File.absolute_path(dirpath), mode)
+      init = Init.new(dirpath)
+      puts init.dirpath
     end
 
     map ["-s", "--server"] => "server"
