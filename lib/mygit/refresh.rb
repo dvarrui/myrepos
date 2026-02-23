@@ -1,14 +1,12 @@
+require_relative "config"
 
 class Refresh
-  attr_reader :configdir
-
   def initialize(dirpath)
-    abs_path = File.absolute_path(dirpath)
-    @configdir = File.join(abs_path, "mygit.d")
+    @config = Config.new(dirpath)
     @pastel = Pastel.new
   end
 
   def call
-    puts "refresh: #{@configdir}"
+    puts "refresh: #{@config.configdir}"
   end
 end

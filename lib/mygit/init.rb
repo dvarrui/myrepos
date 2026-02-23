@@ -1,18 +1,17 @@
 require "fileutils"
 require "pastel"
+require_relative "config"
 
 class Init
-  attr_reader :configdir
-
   def initialize(dirpath)
-    abs_path = File.absolute_path(dirpath)
-    @configdir = File.join(abs_path, "mygit.d")
+    @config = Config.new(dirpath)
     @pastel = Pastel.new
   end
 
   def call
-    create_dir(@configdir)
-    copy_files_into(@configdir)
+    configdir = @config.configdir
+    create_dir(configdir)
+    copy_files_into(configdir)
     puts @pastel.green("Configuration files created!")
   end
 
@@ -29,13 +28,13 @@ class Init
     end
   end
 
-  def copy_files_into(targetdir)
+  def copy_files_into(configdir)
     sourcedir = File.absolute_path(File.join(File.dirname(__FILE__), "files", "config"))
     dirpath = File.join(sourcedir)
     files = Dir.glob("#{dirpath}/*")
     files += Dir.glob("#{dirpath}/.?*")
     begin
-      FileUtils.cp_r(files.sort, targetdir)
+      FileUtils.cp_r(files.sort, configdir)
     rescue
       puts @pastel.red.bold "ERROR | Creating config files!"
       files.each do |filename|
