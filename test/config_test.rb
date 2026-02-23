@@ -14,8 +14,8 @@ class ConfigTest < Test::Unit::TestCase
     abs_dirpath = File.absolute_path(@config_ok.dirpath)
     assert_equal abs_dirpath, @config_ok.abs_dirpath
 
-    configdir = File.join(abs_dirpath, "mygit.d")
-    assert_equal configdir, @config_ok.configdir
+    config_dir = File.join(abs_dirpath, "mygit.d")
+    assert_equal config_dir, @config_ok.config_dir
   end
 
   test "Config is_ok?" do

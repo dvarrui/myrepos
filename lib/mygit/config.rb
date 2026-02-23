@@ -1,17 +1,21 @@
 require "fileutils"
 require "pastel"
+require "yaml"
 
 class Config
   attr_reader :dirpath
   attr_reader :abs_dirpath
-  attr_reader :configdir
+  attr_reader :config_dir
+  attr_reader :data
 
   def initialize(dirpath)
+    @pastel = Pastel.new
+
     @dirpath = dirpath
     @abs_dirpath = File.absolute_path(@dirpath)
-    @configdir = File.join(@abs_dirpath, "mygit.d")
-    @pastel = Pastel.new
-    # configfiles = Dir.
+    @config_dir = File.join(@abs_dirpath, "mygit.d")
+    @config_filepath = File.join(@config_dir, "config.yaml")
+    @data = {}
   end
 
   def is_ok?
@@ -20,11 +24,25 @@ class Config
 
   def create
     return true if is_ok?
-    configdir = @configdir
+    configdir = @config_dir
     create_dir(configdir)
     copy_files_into(configdir)
     puts @pastel.green("Configuration created!")
     true
+  end
+
+  def load
+    if !is_ok?
+      puts @pastel.red.bold "ERROR: Config file not found!"
+      exit 1
+    end
+
+    begin
+      @data = YAML.load_file(@config_filepath)
+    rescue => e
+      puts "ERROR: malformed YAML file! (#{e.message})"
+      @data = {}
+    end
   end
 
   private
@@ -42,7 +60,7 @@ class Config
   end
 
   def real_files
-    dirpath = @configdir
+    dirpath = @config_dir
     files = Dir.glob("#{dirpath}/*")
     files += Dir.glob("#{dirpath}/.?*")
     files.map { File.basename(_1) }
@@ -56,7 +74,7 @@ class Config
     exit 1
   end
 
-  def copy_files_into(configdir)
+  def copy_files_into(config_dir)
     FileUtils.cp_r(template_filepaths.sort, configdir)
   rescue
     puts @pastel.red.bold "ERROR | Creating config files!"
