@@ -16,7 +16,7 @@ class ConfigTest < Test::Unit::TestCase
     assert_equal configdir, @config.configdir
   end
 
-  test "Config exist?" do
-    assert @config.exist?
+  test "Config is_ok?" do
+    assert @config.is_ok?
   end
 end

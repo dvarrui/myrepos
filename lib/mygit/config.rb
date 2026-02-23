@@ -14,17 +14,14 @@ class Config
     # configfiles = Dir.
   end
 
-  def exist?
+  def is_ok?
     template = all_template_files
     real = all_real_files
     (template - real).empty?
   end
 
   def create
-    if exist?
-      puts @pastel.yellow.bold("Configuration files OK!")
-      return true
-    end
+    return true if is_ok?
     configdir = @configdir
     create_dir(configdir)
     copy_files_into(configdir)
