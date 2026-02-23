@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 1.4"
   spec.add_dependency "pastel", "~> 0.8"
   spec.add_dependency "gitlab", "~> 6.1"
-  spec.add_dependency "dotenv", "~> 3.2"
+  # spec.add_dependency "dotenv", "~> 3.2"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
