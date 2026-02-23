@@ -2,6 +2,10 @@
 
 require "bundler/gem_tasks"
 require "rake/testtask"
+require "standard/rake"
+require_relative "tasks/devel"
+
+task default: %i[test standard]
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
@@ -9,11 +13,13 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList["test/**/*_test.rb"]
 end
 
-require "standard/rake"
-
-task default: %i[test standard]
-
 desc "Help"
 task :help do
   system("rake -T")
 end
+
+desc "Delete configuration files"
+task :clean do
+  system("rm -r mygit.d")
+end
+
