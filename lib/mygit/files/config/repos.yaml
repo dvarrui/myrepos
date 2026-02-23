@@ -1,8 +1,8 @@
 # File: mygit.d/repos.yaml
 # Desc: Repos information
-local_repos:
-  - id: NODATA
-    path: NODATA
-remote_repos:
-  - id: NODATA
-    name: NODATA
+:local_repos:
+- :id: NODATA
+  :path: NODATA
+:remote_repos:
+- :id: NODATA
+  :name: NODATA

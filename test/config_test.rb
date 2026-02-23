@@ -22,4 +22,11 @@ class ConfigTest < Test::Unit::TestCase
     assert @config_ok.is_ok?
     assert !@config_err.is_ok?
   end
+
+  test "Config ok values" do
+    @config_ok.load
+    assert "first/folder", @config_ok.data[:local_repos].first
+    assert "endpoint_url", @config_ok.data[:remote_server][:endpoint]
+    assert "secret_token", @config_ok.data[:remote_server][:private_token]
+  end
 end
