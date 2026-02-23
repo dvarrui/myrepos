@@ -17,9 +17,3 @@ desc "Help"
 task :help do
   system("rake -T")
 end
-
-desc "Delete configuration files"
-task :clean do
-  system("rm -r mygit.d")
-end
-
