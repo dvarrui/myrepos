@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "mygit/utils/git_server"
 require_relative "mygit/init"
+require_relative "mygit/refresh"
 require_relative "mygit/version"
 
 module Mygit
@@ -10,12 +10,12 @@ module Mygit
     init.call
   end
 
-  def self.show_version
-    puts "mygit #{Mygit::VERSION}"
+  def self.refresh(dirpath)
+    refresh = Refresh.new(dirpath)
+    refresh.call
   end
 
-  def self.test_server_conn
-    server = GitServer.gitlab
-    puts "Conexión OK (#{server.user.to_h["name"]})"
+  def self.show_version
+    puts "mygit #{Mygit::VERSION}"
   end
 end
