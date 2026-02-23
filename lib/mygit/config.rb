@@ -15,9 +15,9 @@ class Config
   end
 
   def exist?
-    files = all_real_config_files
-    return false if files.empty?
-    files.all? { |filename| File.exist?(filename) }
+    template = all_template_files
+    real = all_real_files
+    (template - real).empty?
   end
   
   def create
@@ -34,7 +34,7 @@ class Config
   
   private
   
-  def all_template_config_files
+  def all_template_filepaths
     sourcedir = File.absolute_path(File.join(File.dirname(__FILE__), "files", "config"))
     dirpath = File.join(sourcedir)
     files = Dir.glob("#{dirpath}/*")
@@ -42,15 +42,19 @@ class Config
     files
   end
 
-  def all_real_config_files
+  def all_template_files
+    files = all_template_filepaths
+    files.map { File.basename(_1) }
+  end
+
+  def all_real_files
     dirpath = @configdir
     files = Dir.glob("#{dirpath}/*")
     files += Dir.glob("#{dirpath}/.?*")
-    files
+    files.map { File.basename(_1) }
   end
 
   def create_dir(dirpath)
-    return if Dir.exist? dirpath
     begin
       FileUtils.mkdir_p(dirpath)
     rescue
@@ -61,12 +65,12 @@ class Config
   end
 
   def copy_files_into(configdir)
-    files = all_real_config_files
+    files = all_template_filepaths
     begin
       FileUtils.cp_r(files.sort, configdir)
     rescue
       puts @pastel.red.bold "ERROR | Creating config files!"
-      files = all_template_config_files
+      files = all_template_filepaths
       files.each do |filename|
         puts @pastel.red "      | #{filename}"
       end
