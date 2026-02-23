@@ -23,7 +23,8 @@ class Init
     begin
       FileUtils.mkdir_p(dirpath)
     rescue
-      puts @pastel.red "ERROR: Directory not created (#{dirpath})"
+      puts @pastel.red.bold "ERROR | Creating folder!"
+      puts @pastel.red "      | #{dirpath}"
       exit 1
     end
   end
@@ -33,6 +34,14 @@ class Init
     dirpath = File.join(sourcedir)
     files = Dir.glob("#{dirpath}/*")
     files += Dir.glob("#{dirpath}/.?*")
-    FileUtils.cp_r(files.sort, targetdir)
+    begin
+      FileUtils.cp_r(files.sort, targetdir)
+    rescue
+      puts @pastel.red.bold "ERROR | Creating config files!"
+      files.each do |filename|
+        puts @pastel.red "      | #{filename}"
+      end
+      exit 1
+    end
   end
 end
