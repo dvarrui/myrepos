@@ -42,7 +42,7 @@ module Mygit
     LONGDESC
     def init(dirpath = Dir.pwd)
       init = Init.new(dirpath)
-      puts init.dirpath
+      init.call
     end
 
     map ["-s", "--server"] => "server"
