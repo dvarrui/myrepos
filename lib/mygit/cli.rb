@@ -1,6 +1,4 @@
 require "thor"
-require_relative "init"
-require_relative "version"
 require_relative "../mygit"
 
 module Mygit
@@ -41,8 +39,7 @@ module Mygit
  
     LONGDESC
     def init(dirpath = Dir.pwd)
-      init = Init.new(dirpath)
-      init.call
+      Mygit.init(dirpath)
     end
 
     map ["-s", "--server"] => "server"
