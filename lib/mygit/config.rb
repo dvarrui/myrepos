@@ -5,9 +5,9 @@ class Config
   attr_reader :dirpath
   attr_reader :abs_dirpath
   attr_reader :configdir
-  
+
   def initialize(dirpath)
-    @dirpath =dirpath 
+    @dirpath = dirpath
     @abs_dirpath = File.absolute_path(@dirpath)
     @configdir = File.join(@abs_dirpath, "mygit.d")
     @pastel = Pastel.new
@@ -19,7 +19,7 @@ class Config
     real = all_real_files
     (template - real).empty?
   end
-  
+
   def create
     if exist?
       puts @pastel.yellow.bold("Configuration files OK!")
@@ -31,9 +31,9 @@ class Config
     puts @pastel.green("Configuration files created!")
     true
   end
-  
+
   private
-  
+
   def all_template_filepaths
     sourcedir = File.absolute_path(File.join(File.dirname(__FILE__), "files", "config"))
     dirpath = File.join(sourcedir)
@@ -55,13 +55,11 @@ class Config
   end
 
   def create_dir(dirpath)
-    begin
-      FileUtils.mkdir_p(dirpath)
-    rescue
-      puts @pastel.red.bold "ERROR | Creating folder!"
-      puts @pastel.red "      | #{dirpath}"
-      exit 1
-    end
+    FileUtils.mkdir_p(dirpath)
+  rescue
+    puts @pastel.red.bold "ERROR | Creating folder!"
+    puts @pastel.red "      | #{dirpath}"
+    exit 1
   end
 
   def copy_files_into(configdir)
@@ -76,6 +74,5 @@ class Config
       end
       exit 1
     end
-  end  
+  end
 end
-  

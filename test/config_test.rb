@@ -3,7 +3,6 @@
 require "test_helper"
 
 class ConfigTest < Test::Unit::TestCase
-
   def setup
     dirpath = File.join(File.dirname(__FILE__), "files")
     @config = Config.new(dirpath)

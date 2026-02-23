@@ -39,7 +39,7 @@ module Mygit
     LONGDESC
     def template
       puts "template: #{options}"
-      #Mygit.init(File.absolute_path(dirpath), mode)
+      # Mygit.init(File.absolute_path(dirpath), mode)
     end
 
     map ["-v", "--version"] => "version"
