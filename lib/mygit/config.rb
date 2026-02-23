@@ -15,9 +15,7 @@ class Config
   end
 
   def is_ok?
-    template = all_template_files
-    real = all_real_files
-    (template - real).empty?
+    (template_files - real_files).empty?
   end
 
   def create
@@ -25,13 +23,13 @@ class Config
     configdir = @configdir
     create_dir(configdir)
     copy_files_into(configdir)
-    puts @pastel.green("Configuration files created!")
+    puts @pastel.green("Configuration created!")
     true
   end
 
   private
 
-  def all_template_filepaths
+  def template_filepaths
     sourcedir = File.absolute_path(File.join(File.dirname(__FILE__), "files", "config"))
     dirpath = File.join(sourcedir)
     files = Dir.glob("#{dirpath}/*")
@@ -39,12 +37,11 @@ class Config
     files
   end
 
-  def all_template_files
-    files = all_template_filepaths
-    files.map { File.basename(_1) }
+  def template_files
+    template_filepaths.map { File.basename(_1) }
   end
 
-  def all_real_files
+  def real_files
     dirpath = @configdir
     files = Dir.glob("#{dirpath}/*")
     files += Dir.glob("#{dirpath}/.?*")
@@ -60,16 +57,12 @@ class Config
   end
 
   def copy_files_into(configdir)
-    files = all_template_filepaths
-    begin
-      FileUtils.cp_r(files.sort, configdir)
-    rescue
-      puts @pastel.red.bold "ERROR | Creating config files!"
-      files = all_template_filepaths
-      files.each do |filename|
-        puts @pastel.red "      | #{filename}"
-      end
-      exit 1
+    FileUtils.cp_r(template_filepaths.sort, configdir)
+  rescue
+    puts @pastel.red.bold "ERROR | Creating config files!"
+    template_filenames.each do |filename|
+      puts @pastel.red "      | #{filename}"
     end
+    exit 1
   end
 end
