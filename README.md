@@ -1,7 +1,9 @@
 
 # Mygit
 
-Herramienta CLI para manejar los comandos Git sobre conjuntos de repositorios.
+Wrapper para ejecutar acciones masivas con git.
+
+Herramienta CLI para aplicar acciones Git sobre conjuntos de repositorios.
 
 ## Instalación
 
@@ -16,9 +18,10 @@ mygit -h
 ```
 
 Funciones:
-* status: Mostrar el estado actual del proyecto.
+* help: Mostrar la ayuda.
+* init: Crear ficheros de configuración.
+* refresh: Actualizar la información de los repositorios.
 * version: Mostrar la versión del script.
-* help: Mostrar la ayuda
 
 ## Development
 
