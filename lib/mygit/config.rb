@@ -13,6 +13,12 @@ class Config
     @pastel = Pastel.new
     # configfiles = Dir.
   end
+
+  def exist?
+    files = all_real_config_files
+    return false if files.empty?
+    files.all? { |filename| File.exist?(filename) }
+  end
   
   def create
     if exist?
@@ -23,6 +29,7 @@ class Config
     create_dir(configdir)
     copy_files_into(configdir)
     puts @pastel.green("Configuration files created!")
+    true
   end
   
   private
@@ -40,12 +47,6 @@ class Config
     files = Dir.glob("#{dirpath}/*")
     files += Dir.glob("#{dirpath}/.?*")
     files
-  end
-
-  def exist?
-    files = all_real_config_files
-    return false if files.empty?
-    files.all? { |filename| File.exist?(filename) }
   end
 
   def create_dir(dirpath)
