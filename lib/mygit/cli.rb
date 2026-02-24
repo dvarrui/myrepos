@@ -30,12 +30,12 @@ module Mygit
 
     map ["-t", "--template"] => "template"
     option :use
-    option :list, type: :boolean
-    desc "template [--use=NAME|--list", "create files in the repository using the template"
+    desc "template [--use=NAME]", "Add files from template"
     long_desc <<-LONGDESC
-    * --use=NAME, create files in the repository using the template.
+    * --use=NAME, add files using the template NAME.
 
-    * --list, Show available templates
+    * Or show available templates
+
     LONGDESC
     def template
       puts "template: #{options}"
