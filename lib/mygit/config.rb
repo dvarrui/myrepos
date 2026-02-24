@@ -27,25 +27,25 @@ class Config
 
   def create
     return true if is_ok?
-    puts "==> [mygit] Creating configuration..."
+    puts "==> [config] Creating configuration..."
     configdir = @config_dir
     create_dir(configdir)
     copy_files_into(configdir)
-    puts @pastel.green("==> [mygit] Done!")
+    puts @pastel.green("==> [config] Done!")
     true
   end
 
   def load
     if !is_ok?
-      puts @pastel.red.bold "==> [mygit] ERROR: Config file not found!"
-      puts @pastel.blue.bold "==> [mygit] Usage: mygit init"
+      puts @pastel.red.bold "==> [config] ERROR: Config file not found!"
+      puts @pastel.blue.bold "==> [config] Usage: mygit init"
       exit 1
     end
 
     begin
       @data = YAML.load_file(@config_filepath)
     rescue => e
-      puts "ERROR: malformed YAML file! (#{e.message})"
+      puts "==> [config] ERROR: malformed YAML file! (#{e.message})"
       @data = {}
     end
   end
