@@ -7,6 +7,8 @@ class Refresh
   end
 
   def call
-    puts "refresh: #{@config.configdir}"
+    puts "==> [mygit] Refreshing..."
+    @config.load
+    puts @config.data.to_s
   end
 end

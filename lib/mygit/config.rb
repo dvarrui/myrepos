@@ -8,13 +8,16 @@ class Config
   attr_reader :config_dir
   attr_reader :data
 
+  CONFIG_BASEDIR = "mygit.d"
+  MAIN_CONFIG_FILENAME = "config.yaml"
+
   def initialize(dirpath)
     @pastel = Pastel.new
 
     @dirpath = dirpath
     @abs_dirpath = File.absolute_path(@dirpath)
-    @config_dir = File.join(@abs_dirpath, "mygit.d")
-    @config_filepath = File.join(@config_dir, "config.yaml")
+    @config_dir = File.join(@abs_dirpath, CONFIG_BASEDIR)
+    @config_filepath = File.join(@config_dir, MAIN_CONFIG_FILENAME)
     @data = {}
   end
 
@@ -24,16 +27,18 @@ class Config
 
   def create
     return true if is_ok?
+    puts "==> [mygit] Creating configuration..."
     configdir = @config_dir
     create_dir(configdir)
     copy_files_into(configdir)
-    puts @pastel.green("Configuration created!")
+    puts @pastel.green("==> [mygit] Done!")
     true
   end
 
   def load
     if !is_ok?
-      puts @pastel.red.bold "ERROR: Config file not found!"
+      puts @pastel.red.bold "==> [mygit] ERROR: Config file not found!"
+      puts @pastel.blue.bold "==> [mygit] Usage: mygit init"
       exit 1
     end
 
@@ -75,7 +80,7 @@ class Config
   end
 
   def copy_files_into(config_dir)
-    FileUtils.cp_r(template_filepaths.sort, configdir)
+    FileUtils.cp_r(template_filepaths.sort, config_dir)
   rescue
     puts @pastel.red.bold "ERROR | Creating config files!"
     template_filenames.each do |filename|
