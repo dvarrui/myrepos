@@ -7,5 +7,8 @@ module MyRepos
     def to_s
       "LocalRepo: #{@basedir}"
     end
+
+    def pull
+    end
   end
 end
