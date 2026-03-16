@@ -11,7 +11,10 @@ module MyRepos
     end
 
     def to_s
-      "LocalRepo: #{@basedir} [pull=#{@pull_state}]"
+      options = ""
+      options += "[pull=#{@pull_state}]" unless @pul_state
+      
+      "LocalRepo: #{@basedir} " + options
     end
 
     def pull
@@ -24,6 +27,21 @@ module MyRepos
         end
       end
       @pull_state
+    end
+
+    def load_info
+      # name
+      # desc
+      # members
+      # remote_branches
+      # last_branch
+      # files (ficheros agrupados por tipo)
+      # main_type
+      # empty
+      # submodules
+      # last_user
+      # last_email
+      # last_date
     end
 
     def self.get_local_repos(basedir)
