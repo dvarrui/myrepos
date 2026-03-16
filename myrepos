@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "lib/mygit/cli"
+require_relative "lib/myrepos/cli"
 require "debug"
 
-Mygit::CLI.start(ARGV)
+MyRepos::CLI.start(ARGV)
