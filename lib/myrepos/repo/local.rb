@@ -1,20 +1,24 @@
 require "pastel"
+require_relative "branch"
 
 module MyRepos
   class LocalRepo
     attr_reader :basedir
+    attr_reader :branch
 
     def initialize(basedir)
       @pastel = Pastel.new
       @basedir = basedir
       @pull_state = false
+      @branch = Branch.new(@basedir)
     end
 
     def to_s
-      options = ""
-      options += "[pull=#{@pull_state}]" unless @pul_state
-      
-      "LocalRepo: #{@basedir} " + options
+      options = []
+      options << "pull=#{@pull_state}]" unless @pull_state
+      options << "current_branch=#{@branch.current}"
+      options << "branches=#{@branch.all.join(",")}"
+      "LocalRepo: #{@basedir} |#{options.join('|')}"
     end
 
     def pull
@@ -31,8 +35,8 @@ module MyRepos
 
     def load_info
       # name
-      # desc
-      # members
+      # ==> remote_repo: desc, members
+      @branch.load
       # remote_branches
       # last_branch
       # files (ficheros agrupados por tipo)
