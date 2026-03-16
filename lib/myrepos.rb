@@ -16,6 +16,6 @@ module MyRepos
   end
 
   def self.show_version
-    puts "mygit #{VERSION}"
+    puts "#{APPNAME} #{VERSION}"
   end
 end
