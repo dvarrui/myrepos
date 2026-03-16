@@ -8,23 +8,23 @@ module MyRepos
     attr_reader :abs_dirpath
     attr_reader :config_dir
     attr_reader :data
-  
+
     MAIN_CONFIG_FILENAME = "config.yaml"
-  
+
     def initialize(dirpath)
       @pastel = Pastel.new
-  
+
       @dirpath = dirpath
       @abs_dirpath = File.absolute_path(@dirpath)
       @config_dir = File.join(@abs_dirpath, MyRepos::CONFIG_BASEDIR)
       @config_filepath = File.join(@config_dir, MAIN_CONFIG_FILENAME)
       @data = {}
     end
-  
+
     def is_ok?
       (template_files - real_files).empty?
     end
-  
+
     def create
       return true if is_ok?
       puts "==> [config] Creating configuration..."
@@ -34,14 +34,14 @@ module MyRepos
       puts @pastel.green("==> [config] Done!")
       true
     end
-  
+
     def load
       if !is_ok?
         puts @pastel.red.bold "==> [config] ERROR: Config file not found!"
         puts @pastel.blue.bold "==> [config] Usage: myrepos init"
         exit 1
       end
-  
+
       begin
         @data = YAML.load_file(@config_filepath)
       rescue => e
@@ -49,9 +49,9 @@ module MyRepos
         @data = {}
       end
     end
-  
+
     private
-  
+
     def template_filepaths
       sourcedir = File.absolute_path(File.join(File.dirname(__FILE__), "files", "config"))
       dirpath = File.join(sourcedir)
@@ -59,18 +59,18 @@ module MyRepos
       files += Dir.glob("#{dirpath}/.?*")
       files
     end
-  
+
     def template_files
       template_filepaths.map { File.basename(_1) }
     end
-  
+
     def real_files
       dirpath = @config_dir
       files = Dir.glob("#{dirpath}/*")
       files += Dir.glob("#{dirpath}/.?*")
       files.map { File.basename(_1) }
     end
-  
+
     def create_dir(dirpath)
       FileUtils.mkdir_p(dirpath)
     rescue
@@ -78,7 +78,7 @@ module MyRepos
       puts @pastel.red "      | #{dirpath}"
       exit 1
     end
-  
+
     def copy_files_into(config_dir)
       FileUtils.cp_r(template_filepaths.sort, config_dir)
     rescue
@@ -90,4 +90,3 @@ module MyRepos
     end
   end
 end
-

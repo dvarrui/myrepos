@@ -5,7 +5,9 @@ require "test_helper"
 class MygitTest < Test::Unit::TestCase
   test "VERSION" do
     assert do
-      ::Mygit.const_defined?(:VERSION)
+      ::MyRepos.const_defined?(:APPNAME)
+      ::MyRepos.const_defined?(:APPNAME)
+      ::MyRepos.const_defined?(:CONFIG_BASEDIR)
     end
   end
 
