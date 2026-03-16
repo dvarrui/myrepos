@@ -16,9 +16,7 @@ module MyRepos
     end
 
     def show
-      @local_repos.each do 
-        puts it.show
-      end
+      @local_repos.each { puts it.to_s }
     end
 
     private

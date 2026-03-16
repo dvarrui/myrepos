@@ -3,9 +3,9 @@ module MyRepos
     def initialize(basedir)
       @basedir = basedir
     end
-  end
 
-  def show
-    puts "LocalRepo: #{@basedir}"
+    def to_s
+      "LocalRepo: #{@basedir}"
+    end
   end
 end
