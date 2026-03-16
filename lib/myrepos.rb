@@ -16,6 +16,6 @@ module MyRepos
   end
 
   def self.show_version
-    puts "mygit #{MyRepos::VERSION}"
+    puts "mygit #{VERSION}"
   end
 end
