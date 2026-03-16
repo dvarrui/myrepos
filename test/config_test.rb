@@ -5,16 +5,16 @@ require "test_helper"
 class ConfigTest < Test::Unit::TestCase
   def setup
     dirpath = File.join(File.dirname(__FILE__), "files", "config.ok")
-    @config_ok = Config.new(dirpath)
+    @config_ok = MyRepos::Config.new(dirpath)
     dirpath = File.join(File.dirname(__FILE__), "files", "config.err")
-    @config_err = Config.new(dirpath)
+    @config_err = MyRepos::Config.new(dirpath)
   end
 
   test "Config attributes" do
     abs_dirpath = File.absolute_path(@config_ok.dirpath)
     assert_equal abs_dirpath, @config_ok.abs_dirpath
 
-    config_dir = File.join(abs_dirpath, "mygit.d")
+    config_dir = File.join(abs_dirpath, MyRepos::CONFIG_BASEDIR)
     assert_equal config_dir, @config_ok.config_dir
   end
 

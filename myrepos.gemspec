@@ -4,7 +4,7 @@ require_relative "lib/myrepos/version"
 
 Gem::Specification.new do |spec|
   spec.name = "myrepos"
-  spec.version = Mygit::VERSION
+  spec.version = MyRepos::VERSION
   spec.authors = ["David Vargas"]
   spec.email = ["dvarrui@protonmail.com"]
 
