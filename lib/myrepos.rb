@@ -13,6 +13,7 @@ module MyRepos
   def self.refresh(dirpath)
     refresh = Refresh.new(dirpath)
     refresh.call
+    refresh.show
   end
 
   def self.show_version
