@@ -28,13 +28,11 @@ module MyRepos
     private
 
     def get_local_repos
-      local_paths = []
+      local_repos = []
       @config.data[:local_repos].each do |basedir|
-        puts "==> [refresh] Searching within: #{@pastel.green(basedir)}"
-        filepaths = Dir.glob(File.join(basedir, "*/**/.git"))
-        local_paths += filepaths.map { File.dirname(_1) }
+        local_repos += LocalRepo.get_local_repos(basedir)
       end
-      local_paths.map { |path| LocalRepo.new(path)}
+      local_repos
     end
   end
 end

@@ -25,5 +25,11 @@ module MyRepos
       end
       @pull_state
     end
+
+    def self.get_local_repos(basedir)
+      filepaths = Dir.glob(File.join(basedir, "*/**/.git"))
+      local_paths = filepaths.map { File.dirname(_1) }
+      local_paths.map { |path| LocalRepo.new(path)}
+    end
   end
 end
