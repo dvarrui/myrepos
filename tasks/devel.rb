@@ -1,3 +1,5 @@
+require_relative "../lib/myrepos/version"
+
 namespace :devel do
   desc "Create /usr/local/bin/mymyrepos"
   task :launcher do
@@ -8,7 +10,7 @@ namespace :devel do
     end
 
     rubypath = `rbenv which ruby`.strip
-    teutonpath = File.join(Dir.pwd, "myrepos")
+    teutonpath = File.join(Dir.pwd, MyRepos::APPNAME)
 
     puts "# Created with: 'rake devel:launcher'"
     puts "# - Copy this content into: #{launcherpath}"
@@ -20,6 +22,6 @@ namespace :devel do
 
   desc "Delete configuration files"
   task :clean do
-    system("rm -r myrepos.d")
+    system("rm -r #{MyRepos::CONFIG_BASEDIR}")
   end
 end

@@ -1,5 +1,5 @@
 
-# Mygit
+# MyRepos
 
 Wrapper para ejecutar acciones masivas con git.
 
@@ -8,13 +8,13 @@ Herramienta CLI para aplicar acciones Git sobre conjuntos de repositorios.
 ## Instalación
 
 ```
-gem install mygit
+gem install myrepos
 ```
 
 ## Uso
 
 ```
-mygit -h
+myrepos -h
 ```
 
 Funciones:
@@ -31,4 +31,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mygit.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dvarrui/myrepos.
