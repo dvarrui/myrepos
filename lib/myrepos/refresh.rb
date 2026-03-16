@@ -7,7 +7,7 @@ class Refresh
   end
 
   def call
-    puts "==> [mygit] Refreshing..."
+    puts "==> [myrepos] Refreshing..."
     @config.load
     puts @config.data.to_s
     find_local_repos

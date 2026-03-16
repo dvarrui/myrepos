@@ -1,14 +1,14 @@
 require "thor"
-require_relative "../mygit"
+require_relative "../myrepos"
 
-module Mygit
+module MyRepos
   class CLI < Thor
     map ["-h", "--help"] => "help"
 
     map ["-i", "--init"] => "init"
     desc "init [DIRPATH]", "Create configuration files"
     long_desc <<-LONGDESC
-    Create configuration files into 'DIRPATH/mygit.d' folder:
+    Create configuration files into 'DIRPATH/myrepos.d' folder:
 
     (1) config.yaml: main config file.
     
@@ -16,7 +16,7 @@ module Mygit
  
     LONGDESC
     def init(dirpath = Dir.pwd)
-      Mygit.init(dirpath)
+      MyRepos.init(dirpath)
     end
 
     map ["-r", "--refresh"] => "refresh"
@@ -25,7 +25,7 @@ module Mygit
     Refresh repos data
     LONGDESC
     def refresh(dirpath = Dir.pwd)
-      Mygit.refresh(dirpath)
+      MyRepos.refresh(dirpath)
     end
 
     map ["-t", "--template"] => "template"
@@ -39,7 +39,7 @@ module Mygit
     LONGDESC
     def template
       puts "template: #{options}"
-      # Mygit.init(File.absolute_path(dirpath), mode)
+      # MyRepos.init(File.absolute_path(dirpath), mode)
     end
 
     map ["-v", "--version"] => "version"
@@ -49,7 +49,7 @@ module Mygit
       Show version
     LONGDESC
     def version
-      Mygit.show_version
+      MyRepos.show_version
     end
   end
 end

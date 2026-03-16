@@ -8,7 +8,7 @@ class Config
   attr_reader :config_dir
   attr_reader :data
 
-  CONFIG_BASEDIR = "mygit.d"
+  CONFIG_BASEDIR = "myrepos.d"
   MAIN_CONFIG_FILENAME = "config.yaml"
 
   def initialize(dirpath)
@@ -38,7 +38,7 @@ class Config
   def load
     if !is_ok?
       puts @pastel.red.bold "==> [config] ERROR: Config file not found!"
-      puts @pastel.blue.bold "==> [config] Usage: mygit init"
+      puts @pastel.blue.bold "==> [config] Usage: myrepos init"
       exit 1
     end
 

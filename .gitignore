@@ -1,6 +1,7 @@
 # personal
 /private/
-/mygit.d/
+/myrepos.d/
+
 # bundler gem mygit
 /.bundle/
 /.yardoc

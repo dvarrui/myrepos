@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "lib/mygit/version"
+require_relative "lib/myrepos/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "mygit"
+  spec.name = "myrepos"
   spec.version = Mygit::VERSION
   spec.authors = ["David Vargas"]
   spec.email = ["dvarrui@protonmail.com"]
 
-  spec.summary = "Git wrapper to execute several massive actions with git."
-  spec.description = "Git wrapper to execute several massive actions with git."
-  spec.homepage = "https://github.com/dvarrui/mygit"
+  spec.summary = "Wrapper to execute massive actions with git."
+  spec.description = "Wrapper to execute several massive actions with git."
+  spec.homepage = "https://github.com/dvarrui/repos"
   spec.required_ruby_version = ">= 3.2.0"
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   spec.metadata = {
     "homepage_uri" => spec.homepage,
-    "source_code_uri" => "https://github.com/dvarrui/mygit",
-    "changelog_uri" => "https://github.com/dvarrui/mygit/blob/main/CHANGELOG.md"
+    "source_code_uri" => "https://github.com/dvarrui/myrepos",
+    "changelog_uri" => "https://github.com/dvarrui/myrepos/blob/main/CHANGELOG.md"
   }
 
   # Specify which files should be added to the gem when it is released.

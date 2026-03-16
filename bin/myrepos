@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "mygit/cli"
+require "myrepos/cli"
 
-Mygit::CLI.start(ARGV)
+MyRepos::CLI.start(ARGV)

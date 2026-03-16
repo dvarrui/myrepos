@@ -1,14 +1,14 @@
 namespace :devel do
-  desc "Create /usr/local/bin/mymygit"
+  desc "Create /usr/local/bin/mymyrepos"
   task :launcher do
-    launcherpath = "/usr/local/bin/mymygit"
+    launcherpath = "/usr/local/bin/mymyrepos"
     if File.exist?(launcherpath)
       warn "File exist! (#{launcherpath})"
       exit 1
     end
 
     rubypath = `rbenv which ruby`.strip
-    teutonpath = File.join(Dir.pwd, "mygit")
+    teutonpath = File.join(Dir.pwd, "myrepos")
 
     puts "# Created with: 'rake devel:launcher'"
     puts "# - Copy this content into: #{launcherpath}"
@@ -20,6 +20,6 @@ namespace :devel do
 
   desc "Delete configuration files"
   task :clean do
-    system("rm -r mygit.d")
+    system("rm -r myrepos.d")
   end
 end

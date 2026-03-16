@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "mygit/config"
-require_relative "mygit/refresh"
-require_relative "mygit/version"
+require_relative "myrepos/config"
+require_relative "myrepos/refresh"
+require_relative "myrepos/version"
 
-module Mygit
+module MyRepos
   def self.init(dirpath)
     config = Config.new(dirpath)
     config.create
@@ -16,6 +16,6 @@ module Mygit
   end
 
   def self.show_version
-    puts "mygit #{Mygit::VERSION}"
+    puts "mygit #{MyRepos::VERSION}"
   end
 end
