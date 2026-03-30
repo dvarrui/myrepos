@@ -2,6 +2,7 @@
 
 require_relative "myrepos/config"
 require_relative "myrepos/refresh"
+require_relative "myrepos/template"
 require_relative "myrepos/version"
 
 module MyRepos
@@ -18,5 +19,10 @@ module MyRepos
 
   def self.show_version
     puts "#{APPNAME} #{VERSION}"
+  end
+
+  def self.template(name)
+    template = Template.new(name)
+    template.call
   end
 end

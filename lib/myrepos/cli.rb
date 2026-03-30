@@ -29,17 +29,15 @@ module MyRepos
     end
 
     map ["-t", "--template"] => "template"
-    option :use
-    desc "template [--use=NAME]", "Add files from template"
+    desc "template [NAME]", "Add files from template NAME"
     long_desc <<-LONGDESC
-    * --use=NAME, add files using the template NAME.
+    * template NAME, add files using the template NAME.
 
-    * Or show available templates
+    * template, show template list
 
     LONGDESC
-    def template
-      puts "template: #{options}"
-      # MyRepos.init(File.absolute_path(dirpath), mode)
+    def template(name=:list)
+      MyRepos.template(name)
     end
 
     map ["-v", "--version"] => "version"
